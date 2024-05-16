@@ -1,0 +1,69 @@
+##Main Study Script
+
+##Include libraries
+libraryModes;
+libraryGeometry;
+libraryMesh;
+libraryFDE;
+
+##Define Structures
+#Properties for waveguide component (Si/Si3N4)
+wgSi = {"name": "Waveguide",
+      "material": "Si (Silicon) - Palik",
+      "width": 500,
+      "height": 220,
+      "length": 1};
+wgSiN = {"name": "Waveguide",
+      "material": "Si3N4 (Silicon Nitride) - Phillip",
+      "width": 500,
+      "height": 325,
+      "length": 1};
+#Properties for base component (SiO2)
+cladding = {"name": "Cladding",
+      "material": "SiO2 (Glass) - Palik",
+      "width": 7,
+      "height": 2,
+      "length": 1};
+#Properties for cladding component (SiO2)
+base = {"name": "Base",
+      "material": "SiO2 (Glass) - Palik",
+      "width": 7,
+      "height": 1,
+      "length": 1};
+#Properties for wafer component (Si)
+wafer = {"name": "Wafer",
+      "material": "Si (Silicon) - Palik",
+      "width": 7,
+      "height": 2,
+      "length": 1};
+#Properties for mesh FDE
+meshFDE = {"name": "FDE",
+      "xDef": 50,
+      "yDef": 50,
+      "out": 0.5};
+#Properties for FDE Modal Analysis (in range, near, max)
+FDESiN = {"wavelength": 1.55,
+      "nsearch": "near",
+      "n1": 2.2,
+      "n2": 1.4};
+FDESi = {"wavelength": 1.55,
+      "nsearch": "max"};
+#Properties for FDE Sweep Analysis single
+singleSweep = {"type": "wavelength",
+        "start": 1.5,
+        "stop": 1.6,
+        "points": 10,
+        "mode": 1,
+        "modes": 8};
+#Save data types
+SaveTypes = {"lumerical": true,
+        "matlab": true,
+        "model": true};
+               
+
+switchtolayout;
+centerWG(wgSi,cladding,base,wafer);
+centerMesh(meshFDE,wgSi);
+prepareFDE(FDESi);
+
+nmodes = runModes();
