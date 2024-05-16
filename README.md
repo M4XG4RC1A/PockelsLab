@@ -56,25 +56,25 @@ Nanodispositivo fotónico para detección de biomoléculas mejorado con propieda
 		- [x] Obtener el modelo compacto de la guia de onda.
 - [ ] Fase 4: Análisis modal de guías de onda con curvatura en presencia de analito, utilizando Lumerical MODE.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y curvatura de 30um.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento activo (n=1.34) y curvatura de 30um.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y curvatura de 300um.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento activo (n=1.34) y curvatura de 300um.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 - [ ] Fase 5: Análisis del comportamiento del BaTiO3 en presencia de campo eléctrico, utilizando Lumerical CHARGE y MODE.
 	- [ ] Analisis del campo electrico en guia de onda de Si con pelicula de BaTiO3 utilizando Lumerical CHARGE.
 		- [ ] Obtencion de la funcion de trabajo.
