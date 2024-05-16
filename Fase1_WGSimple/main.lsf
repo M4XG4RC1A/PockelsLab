@@ -1,0 +1,206 @@
+##Main Study Script
+
+##Include libraries
+libraryModes;
+libraryGeometry;
+libraryMesh;
+libraryFDE;
+
+##Define Structures
+#Properties for waveguide component (Si/Si3N4)
+wgSi = {"name": "Waveguide",
+      "material": "PockelsLab - Si (Silicon) - Palik",
+      "width": 500,
+      "height": 220,
+      "length": 1};
+wgSiN = {"name": "Waveguide",
+      "material": "PockelsLab - Si3N4 (Silicon Nitride) - Luke",
+      "width": 3000,
+      "height": 800,
+      "length": 1};
+#Properties for base component (SiO2)
+cladding = {"name": "Cladding",
+      "material": "PockelsLab - SiO2 (Glass) - Palik",
+      "width": 7,
+      "height": 2,
+      "length": 1};
+#Properties for cladding component (SiO2)
+base = {"name": "Base",
+      "material": "PockelsLab - SiO2 (Glass) - Palik",
+      "width": 7,
+      "height": 1,
+      "length": 1};
+#Properties for wafer component (Si)
+wafer = {"name": "Wafer",
+      "material": "PockelsLab - Si (Silicon) - Palik",
+      "width": 7,
+      "height": 2,
+      "length": 1};
+#Properties for mesh FDE
+meshFDE = {"name": "FDE",
+      "xDef": 50,
+      "yDef": 50,
+      "out": 0.5};
+#Properties for FDE Modal Analysis (in range, near, max)
+FDESiN = {"wavelength": 1.55,
+      "nsearch": "near",
+      "n1": 2.2,
+      "n2": 1.4};
+FDESi = {"wavelength": 1.55,
+      "nsearch": "max"};
+#Properties for FDE Sweep Analysis single
+singleSweep = {"type": "wavelength",
+        "start": 1.5,
+        "stop": 1.6,
+        "points": 10,
+        "mode": 1,
+        "modes": 8};
+#Save data types
+SaveTypes = {"lumerical": true,
+        "matlab": true,
+        "model": true};
+
+##Set geometries
+#Set layout
+switchtolayout;
+#Modify geometry to start data
+centerWG(wgSi,cladding,base,wafer);
+#Modify mesh and center
+centerMesh(meshFDE,wgSi);
+#Prepare FDE Solver
+prepareFDE(FDESi);
+#Prepare Sweep Analysis
+#prepareSingleSweep(singleSweep);
+
+##Analysis
+SiWidths = [470,510];
+SiHeights = [215.3,223.1];
+
+SiNWidths = [2950,3050];
+SiNHeights = [790,810];
+
+print("Si base waveguide");
+
+nmodes = runModes();
+print("Modes>0, Modes:"+num2str(nmodes));
+
+mTE = mainTE(nmodes);
+saveMode(nmodes,mTE.i,"wgSi/Main/Modes","WaveguideSiMode",SaveTypes);
+
+FDESweep = FDESi;
+FDESweep.wavelength = singleSweep.start;
+prepareFDE(FDESweep);
+nmodes = runModes();
+mTE = mainTE(nmodes);
+saveMode(nmodes,mTE.i,"wgSi/Main/Sweep","WaveguideSiMode",SaveTypes);
+
+singleSweep.mode = mTE.i;
+prepareSingleSweep(singleSweep);
+
+runSweep();
+saveSweep(singleSweep.start,"wgSi/Main/Sweep","WaveguideSiFreq",SaveTypes);
+closeall;
+
+for(x=SiWidths){
+    for(y=SiHeights){
+        print("Running x:"+num2str(x)+", y:"+num2str(y));
+        
+        #Change dimensions
+        wgSi.width = x;
+        wgSi.height = y;
+        
+        #Set layout
+        switchtolayout;
+        centerWG(wgSi,cladding,base,wafer);
+        centerMesh(meshFDE,wgSi);
+        prepareFDE(FDESi);
+        
+        nmodes = runModes();
+        print("Modes>0, Modes:"+num2str(nmodes));
+        
+        mTE = mainTE(nmodes);
+        saveMode(nmodes,mTE.i,"wgSi/Corners/Modes","WaveguideSiMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+
+        FDESweep = FDESi;
+        FDESweep.wavelength = singleSweep.start;
+        prepareFDE(FDESweep);
+        nmodes = runModes();
+        mTE = mainTE(nmodes);
+        saveMode(nmodes,mTE.i,"wgSi/Corners/Sweep","WaveguideSiMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        
+        singleSweep.mode = mTE.i;
+        prepareSingleSweep(singleSweep);
+        
+        runSweep();
+        saveSweep(singleSweep.start,"wgSi/Corners/Sweep","WaveguideSiFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        closeall;
+    }
+}
+
+
+print("Si3N4 base waveguide");
+
+switchtolayout;
+centerWG(wgSiN,cladding,base,wafer);
+centerMesh(meshFDE,wgSiN);
+prepareFDE(FDESiN);
+nmodes = runModes();
+
+mTE = mainTE(nmodes);
+print("Modes>0, Modes:"+num2str(nmodes));
+
+saveMode(nmodes,mTE.i,"wgSi3N4/Main/Modes","WaveguideSiNMode",SaveTypes);
+
+FDESweep = FDESiN;
+FDESweep.wavelength = singleSweep.start;
+prepareFDE(FDESweep);
+nmodes = runModes();
+mTE = mainTE(nmodes);
+saveMode(nmodes,mTE.i,"wgSi3N4/Main/Sweep","WaveguideSiMMode",SaveTypes);
+
+singleSweep.mode = mTE.i;
+prepareSingleSweep(singleSweep);
+
+runSweep();
+saveSweep(singleSweep.start,"wgSi3N4/Main/Sweep","WaveguideSiNFreq",SaveTypes);
+closeall;
+
+for(x=SiNWidths){
+    for(y=SiNHeights){
+        print("Running x:"+num2str(x)+", y:"+num2str(y));
+        
+        #Change dimensions
+        wgSiN.width = x;
+        wgSiN.height = y;
+        
+        #Set layout
+        switchtolayout;
+        centerWG(wgSiN,cladding,base,wafer);
+        centerMesh(meshFDE,wgSiN);
+        prepareFDE(FDESiN);
+        
+        nmodes = runModes();
+        print("Modes>0, Modes:"+num2str(nmodes));
+        
+        mTE = mainTE(nmodes);
+        saveMode(nmodes,mTE.i,"wgSi3N4/Corners/Modes","WaveguideSiNMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+
+        FDESweep = FDESiN;
+        FDESweep.wavelength = singleSweep.start;
+        prepareFDE(FDESweep);
+        runModes();
+        
+        mTE = mainTE(nmodes);
+        saveMode(nmodes,mTE.i,"wgSi3N4/Corners/Sweep","WaveguideSiNMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        
+        singleSweep.mode = mTE.i;
+        prepareSingleSweep(singleSweep);
+        
+        runSweep();
+        saveSweep(singleSweep.start,"wgSi3N4/Corners/Sweep","WaveguideSiNFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        closeall;
+    }
+}
+
+
+print("Finish");
