@@ -3,25 +3,25 @@ Nanodispositivo fotónico para detección de biomoléculas mejorado con propieda
 
 - [ ] Fase 1: Análisis modal de guías de onda sin materiales externos, utilizando Lumerical MODE.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con revestimiento de SiO2.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
-        - [ ] Analizar la guia de onda de Si con revestimiento de SiO2 y fallas de fabricacion.
-        	- [ ] Obtener el modo de propagacion TE.
-                - [ ] Obtener el indice de efectividad a 1550nm.
-                - [ ] Obtener el indice de grupo a 1550nm.
-                - [ ] Analizar por el metodo de las esquinas.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
+	- [ ] Analizar la guia de onda de Si con revestimiento de SiO2 y fallas de fabricacion.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad a 1550nm.
+		- [x] Obtener el indice de grupo a 1550nm.
+		- [x] Analizar por el metodo de las esquinas.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con revestimiento de SiO2.
- 		- [ ] Obtener el modo de propagacion TE. 
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
-        - [ ] Analizar la guia de onda de SiN4 con revestimiento de SiO2 y fallas de fabricacion.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+ 		- [x] Obtener el modo de propagacion TE. 
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
+	- [ ] Analizar la guia de onda de SiN4 con revestimiento de SiO2 y fallas de fabricacion.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 - [ ] Fase 2: Análisis modal de guías de onda curvas sin materiales externos, utilizando Lumerical MODE.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con revestimiento de SiO2 y curvatura de 30um.
 		- [ ] Obtener el modo de propagacion TE.
