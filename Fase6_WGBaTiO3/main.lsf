@@ -1,0 +1,128 @@
+##Main Study Script
+
+##Include libraries
+libraryModes;
+libraryGeometry;
+libraryMesh;
+libraryFDE;
+
+##Define Structures
+#Properties for waveguide component (Si/Si3N4)
+wgSi = {"name": "Waveguide",
+      "material": "PockelsLab - Si (Silicon) - Palik",
+      "width": 500,
+      "height": 220,
+      "length": 1,
+      "Bend": 30,
+      "folder":"wgSi"};
+wgSiN = {"name": "Waveguide",
+      "material": "PockelsLab - Si3N4 (Silicon Nitride) - Luke",
+      "width": 3000,
+      "height": 800,
+      "length": 1,
+      "Bend": 300,
+      "folder":"wgSi3N4"};
+#Properties for base component (SiO2)
+claddingActive = {"name": "Cladding",
+      "material": "PockelsLab - MediumActive",
+      "width": 7,
+      "height": 2,
+      "length": 1,
+      "folder":"Active"};
+claddingInactive = {"name": "Cladding",
+      "material": "PockelsLab - MediumNoActive",
+      "width": 7,
+      "height": 2,
+      "length": 1,
+      "folder":"Inactive"};
+#Properties for cladding component (SiO2)
+BTOActive = {"name": "Base",
+      "material": "PockelsLab - BTO - Active",
+      "width": 7,
+      "height": 1,
+      "length": 1,
+      "folder":"BTOActive"};
+BTOInactive = {"name": "Base",
+      "material": "PockelsLab - BTO - Inactive",
+      "width": 7,
+      "height": 1,
+      "length": 1,
+      "folder":"BTOInactive"};
+#Properties for wafer component (Si)
+wafer = {"name": "Wafer",
+      "material": "PockelsLab - Si (Silicon) - Palik",
+      "width": 7,
+      "height": 2,
+      "length": 1};
+#Properties for mesh FDE
+meshFDE = {"name": "FDE",
+      "xDef": 50,
+      "yDef": 50,
+      "out": 0.5};
+#Properties for FDE Modal Analysis (in range, near, max)
+FDESiN = {"wavelength": 1.55,
+      "nsearch": "near",
+      "n1": 2.2,
+      "n2": 1.4};
+FDESi = {"wavelength": 1.55,
+      "nsearch": "max"};
+#Properties for FDE Sweep Analysis single
+singleSweep = {"type": "wavelength",
+        "start": 1.5,
+        "stop": 1.6,
+        "points": 10,
+        "mode": 1,
+        "modes": 8};
+#Save data types
+SaveTypes = {"lumerical": true,
+        "matlab": true,
+        "model": true};
+
+function selObj(I,wg1,wg2){
+    if(I==1){
+        return wg1;
+    }else{
+        return wg2;
+    }
+}
+
+for(wgI = [1,2]){
+    for(cladI = [1,2]){
+        for(basI = [1,2]){
+            wg = selObj(wgI,wgSi,wgSiN);
+            fde = selObj(wgI,FDESi,FDESiN);
+            cladding = selObj(cladI,claddingActive,claddingInactive);
+            base = selObj(basI,BTOActive,BTOInactive);
+            
+            print("Actual: "+wg.folder+", "+cladding.folder+", "+base.folder);
+            
+            switchtolayout;
+            centerWG(wg,cladding,base,wafer);
+            centerMesh(meshFDE,wg);
+            prepareFDE(fde);
+            
+            nmodes = runModes();
+            print("Modes>0, Modes:"+num2str(nmodes));
+            
+            mTE = 1;#mainTE(nmodes);
+            saveMode(nmodes,mTE,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Modes","WaveguideSiMode",SaveTypes);
+            
+            FDESweep = fde;
+            FDESweep.wavelength = singleSweep.start;
+            prepareFDE(FDESweep);
+            
+            nmodes = runModes();
+            mTE = 1;#mainTE(nmodes);
+            saveMode(nmodes,mTE,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Sweep","WaveguideSiMode",SaveTypes);
+            
+            singleSweep.mode = mTE;
+            prepareSingleSweep(singleSweep);
+            
+            runSweep();
+            saveSweep(singleSweep.start,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Sweep","WaveguideSiFreq",SaveTypes);
+            closeall;
+        }
+    }
+}
+
+print("Finish");
