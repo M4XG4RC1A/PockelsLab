@@ -83,45 +83,45 @@ Nanodispositivo fotónico para detección de biomoléculas mejorado con propieda
 		- [ ] Obtencion del cambio de indice de efectividad contra el voltaje aplicado.
 - [ ] Fase 6: Análisis modal de guías de onda en presencia de \ce{BaTiO3} y analito, utilizando Lumerical MODE.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y base de BaTiO3 inactivo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento activo (n=1.34) y base de BaTiO3 inactivo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y base de BaTiO3 inactivo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento activo (n=1.34) y base de BaTiO3 inactivo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y base de BaTiO3 activo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento activo (n=1.34) y base de BaTiO3 activo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento inactivo (n=1.33) y base de BaTiO3 activo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 	- [ ] Analizar la guia de onda de SiN4 3000x800nnm con fondo de SiO2, recubrimiento activo (n=1.34) y base de BaTiO3 activo.
-		- [ ] Obtener el modo de propagacion TE.
-		- [ ] Obtener el indice de efectividad de 1500-1600nm.
-		- [ ] Obtener el indice de grupo de 1500-1600nm.
-		- [ ] Obtener el modelo compacto de la guia de onda.
+		- [x] Obtener el modo de propagacion TE.
+		- [x] Obtener el indice de efectividad de 1500-1600nm.
+		- [x] Obtener el indice de grupo de 1500-1600nm.
+		- [x] Obtener el modelo compacto de la guia de onda.
 - [ ] Fase 7: Análisis modal de guías de onda curvas en presencia de \ce{BaTiO3} y analito, utilizando Lumerical MODE.
 	- [ ] Analizar la guia de onda de Si 500x220nnm con fondo de SiO2, recubrimiento inactivo (n=1.33), base de BaTiO3 inactivo y curvatura de 30um.
 		- [ ] Obtener el modo de propagacion TE.
