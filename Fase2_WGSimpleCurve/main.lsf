@@ -91,10 +91,10 @@ mTE = mainTE(nmodes);
 saveMode(nmodes,mTE.i,"wgSi/Sweep","WaveguideSiMode",SaveTypes);
 
 singleSweep.mode = mTE.i;
-prepareSingleSweep(singleSweep);
+prepareSingleSweepDetailed(singleSweep);
 
 runSweep();
-saveSweep(singleSweep.start,"wgSi/Sweep","WaveguideSiFreq",SaveTypes);
+saveSweepInterconnect(singleSweep.start,"wgSi/Sweep","WaveguideSiFreq",SaveTypes);
 closeall;
 closeBendStudy();
 
@@ -122,10 +122,10 @@ mTE = mainTE(nmodes);
 saveMode(nmodes,mTE.i,"wgSi3N4/Sweep","WaveguideSiMMode",SaveTypes);
 
 singleSweep.mode = mTE.i;
-prepareSingleSweep(singleSweep);
+prepareSingleSweepDetailed(singleSweep);
 
 runSweep();
-saveSweep(singleSweep.start,"wgSi3N4/Sweep","WaveguideSiNFreq",SaveTypes);
+saveSweepInterconnect(singleSweep.start,"wgSi3N4/Sweep","WaveguideSiNFreq",SaveTypes);
 closeall;
 closeBendStudy();
 

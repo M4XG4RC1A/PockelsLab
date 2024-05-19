@@ -70,7 +70,7 @@ centerMesh(meshFDE,wgSi);
 #Prepare FDE Solver
 prepareFDE(FDESi);
 #Prepare Sweep Analysis
-#prepareSingleSweep(singleSweep);
+#prepareSingleSweepDetailed(singleSweep);
 
 ##Analysis
 SiWidths = [470,510];
@@ -95,10 +95,10 @@ mTE = mainTE(nmodes);
 saveMode(nmodes,mTE.i,"wgSi/Main/Sweep","WaveguideSiMode",SaveTypes);
 
 singleSweep.mode = mTE.i;
-prepareSingleSweep(singleSweep);
+prepareSingleSweepDetailed(singleSweep);
 
 runSweep();
-saveSweep(singleSweep.start,"wgSi/Main/Sweep","WaveguideSiFreq",SaveTypes);
+saveSweepInterconnect(singleSweep.start,"wgSi/Main/Sweep","WaveguideSiFreq",SaveTypes);
 closeall;
 
 for(x=SiWidths){
@@ -129,10 +129,10 @@ for(x=SiWidths){
         saveMode(nmodes,mTE.i,"wgSi/Corners/Sweep","WaveguideSiMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
         
         singleSweep.mode = mTE.i;
-        prepareSingleSweep(singleSweep);
+        prepareSingleSweepDetailed(singleSweep);
         
         runSweep();
-        saveSweep(singleSweep.start,"wgSi/Corners/Sweep","WaveguideSiFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        saveSweepInterconnect(singleSweep.start,"wgSi/Corners/Sweep","WaveguideSiFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
         closeall;
     }
 }
@@ -159,10 +159,10 @@ mTE = mainTE(nmodes);
 saveMode(nmodes,mTE.i,"wgSi3N4/Main/Sweep","WaveguideSiMMode",SaveTypes);
 
 singleSweep.mode = mTE.i;
-prepareSingleSweep(singleSweep);
+prepareSingleSweepDetailed(singleSweep);
 
 runSweep();
-saveSweep(singleSweep.start,"wgSi3N4/Main/Sweep","WaveguideSiNFreq",SaveTypes);
+saveSweepInterconnect(singleSweep.start,"wgSi3N4/Main/Sweep","WaveguideSiNFreq",SaveTypes);
 closeall;
 
 for(x=SiNWidths){
@@ -194,10 +194,10 @@ for(x=SiNWidths){
         saveMode(nmodes,mTE.i,"wgSi3N4/Corners/Sweep","WaveguideSiNMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
         
         singleSweep.mode = mTE.i;
-        prepareSingleSweep(singleSweep);
+        prepareSingleSweepDetailed(singleSweep);
         
         runSweep();
-        saveSweep(singleSweep.start,"wgSi3N4/Corners/Sweep","WaveguideSiNFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
+        saveSweepInterconnect(singleSweep.start,"wgSi3N4/Corners/Sweep","WaveguideSiNFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
         closeall;
     }
 }

@@ -61,6 +61,25 @@ function prepareSingleSweep(sweep){
     setanalysis("number of test modes",sweep.modes);
 }
 
+function prepareSingleSweepDetailed(sweep){
+    #Select mode for analysis
+    selectmode(sweep.mode);
+    #Set single mode analysis
+    setanalysis("track selected mode",1);
+    setanalysis("detailed dispersion calculation",1);
+    #Set wave limits
+    if(sweep.type=="frequency"){
+        setanalysis("stop frequency",sweep.stop*1e12);
+    }else if(sweep.type=="wavelength"){
+        setanalysis("stop wavelength",sweep.stop*1e-6);
+    }else{
+        print("Invalid type sweep");
+    }
+    #Set parameters for frequency analysis
+    setanalysis("number of points",sweep.points);
+    setanalysis("number of test modes",sweep.modes);
+}
+
 #Run and get modes
 function runModes(){
     nmodes=findmodes;
@@ -136,6 +155,47 @@ function saveSweep(wavelength,folder,name,data){
     dLambda = c/getdata("FDE::data::frequencysweep","f_D")*1e6;
     dispersion = getdata("FDE::data::frequencysweep","D");
     compactModel = getCompactModel(wavelength);
+    
+    #Save data as lumerical type
+    if(data.lumerical){ savedata("./"+folder+"/"+name,wavelength,lambda,loss,neff,vgLambda,vg,ng,dLambda,dispersion,compactModel); }
+    #Save data as matlab type    
+    if(data.matlab){ matlabsave("./"+folder+"/"+name,wavelength,lambda,loss,neff,vgLambda,vg,ng,dLambda,dispersion,compactModel); }
+    #Save data images    
+    if(data.model){
+        plot(vgLambda,ng,"Wavelength (microns)","Group Index");
+        legend("ng");
+        exportfigure("./"+folder+"/"+name+"_ngvslambda");
+        plot(lambda,neff,"Wavelength (microns)","Effective Index");
+        legend("neff");
+        exportfigure("./"+folder+"/"+name+"_neffvslambda");
+        try{
+            plot (lambda, neff, "lambda", "neff", compactModel.ec, "plot type=line, color=red, pen=-, linewidth=2");  # plot the result
+            holdon;    
+            plot (lambda,  compactModel.fit, "lambda", "neff", compactModel.ec, "plot type=line, color=blue, pen=-., linewidth=2");  # plot the result    
+            legend("neff","Fit");
+            exportfigure("./"+folder+"/"+name+"_compactModel");
+            holdoff;
+        }
+    }
+}
+
+function saveSweepInterconnect(wavelength,folder,name,data){
+    #Storage mode data in variables    
+    #10 Space storage    
+    lambda = c/getdata("FDE::data::frequencysweep","f")*1e6;
+    loss = getdata("FDE::data::frequencysweep","loss");
+    neff = abs(getdata("FDE::data::frequencysweep","neff"));
+    #9 Space storage
+    vgLambda = c/getdata("FDE::data::frequencysweep","f_vg")*1e6;    
+    vg = getdata("FDE::data::frequencysweep","vg");
+    ng = c/vg;
+    #8 Space storage
+    dLambda = c/getdata("FDE::data::frequencysweep","f_D")*1e6;
+    dispersion = getdata("FDE::data::frequencysweep","D");
+    compactModel = getCompactModel(wavelength);
+    
+    dataname = copydcard("frequencysweep");
+    savedcard("./"+folder+"/INTERCONNECT_"+name+".ldf", dataname);
     
     #Save data as lumerical type
     if(data.lumerical){ savedata("./"+folder+"/"+name,wavelength,lambda,loss,neff,vgLambda,vg,ng,dLambda,dispersion,compactModel); }

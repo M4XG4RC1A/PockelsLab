@@ -116,10 +116,10 @@ for(wgI = [1,2]){
             saveMode(nmodes,mTE,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Sweep","WaveguideSiMode",SaveTypes);
             
             singleSweep.mode = mTE;
-            prepareSingleSweep(singleSweep);
+            prepareSingleSweepDetailed(singleSweep);
             
             runSweep();
-            saveSweep(singleSweep.start,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Sweep","WaveguideSiFreq",SaveTypes);
+            saveSweepInterconnect(singleSweep.start,wg.folder+"/"+cladding.folder+"/"+base.folder+"/Sweep","WaveguideSiFreq",SaveTypes);
             closeall;
         }
     }
