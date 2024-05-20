@@ -1,0 +1,248 @@
+print("Library Plot ON");
+
+function multiPlotSave(name,circuit1,circuit2,data1,data2){
+    plotMulti(circuit1,circuit2,data1,data2);
+    exportfigure(name);
+}  
+
+function multiPlotSaveCut1(name,circuit1,data1){
+    plotMultiCut1(circuit1,data1);    
+    exportfigure(name);
+}  
+
+function multiPlotSaveCut2(name,circuit1,circuit2,data1,data2){
+    plotMultiCut2(circuit1,circuit2,data1,data2);    
+    exportfigure(name);
+}  
+
+function multiPlotSaveCut3(name,circuit1,circuit2,circuit3,data1,data2,data3){
+    plotMultiCut3(circuit1,circuit2,circuit3,data1,data2,data3);    
+    exportfigure(name);
+} 
+
+function multiPlotSaveCut4(name,circuit1,circuit2,circuit3,circuit4,data1,data2,data3,data4){
+    plotMultiCut4(circuit1,circuit2,circuit3,circuit4,data1,data2,data3,data4);    
+    exportfigure(name);
+} 
+
+function plotMultiCut1(circuit1,data1){
+    lateral = 500;   
+    file = getFileMulti(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1));
+}
+
+function plotMultiCut2(circuit1,circuit2,data1,data2){
+    lateral = 500;   
+    file = getFileMulti(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileMulti(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2));
+}
+
+function plotMultiCut3(circuit1,circuit2,circuit3,data1,data2,data3){
+    lateral = 500;   
+    file = getFileMulti(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileMulti(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    file = getFileMulti(circuit3,data3);
+    loaddata(file);
+    
+    gain3 = gain;
+    
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),gain3(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2),getNameMultiShort(circuit3,data3));
+}
+
+function plotMultiCut4(circuit1,circuit2,circuit3,circuit4,data1,data2,data3,data4){
+    lateral = 500;   
+    file = getFileMulti(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileMulti(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    file = getFileMulti(circuit3,data3);
+    loaddata(file);
+    
+    gain3 = gain;
+    
+    file = getFileMulti(circuit4,data4);
+    loaddata(file);
+    
+    gain4 = gain;
+    
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),gain3(5000-lateral:5000+lateral),gain4(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2),getNameMultiShort(circuit3,data3),getNameMultiShort(circuit4,data4));
+}
+
+function plotMulti(circuit1,circuit2,data1,data2){
+    file = getFileMulti(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileMulti(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    plot(lambda*1e9,gain1,gain2,"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2));
+}
+
+function getFileMulti(circuit,data){
+    nameGC = gcName(circuit.GC);
+    
+    res = data.sense1;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res1 = "Res1"+nameSt+nameDet;
+    
+    res = data.sense2;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res2 = "Res2"+nameSt+nameDet;
+    
+    res = data.sense3;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res3 = "Res3"+nameSt+nameDet;
+    
+    return "./Simulation/"+nameGC+"/"+res1+"/"+res2+"/"+res3+"/Circuit"+nameGC+"_"+res1+"_"+res2+"_"+res3+".lsf";
+}
+
+function getNameMultiShort(circuit,data){
+    nameGC = gcName(circuit.GC);
+    
+    res = data.sense1;
+    nameDet = detectNameShort(floor(res/2));
+    nameSt = stateNameShort(mod(res,2));
+    res1 = "R1("+nameSt+","+nameDet+")";
+    
+    res = data.sense2;
+    nameDet = detectNameShort(floor(res/2));
+    nameSt = stateNameShort(mod(res,2));
+    res2 = "R2("+nameSt+","+nameDet+")";
+    
+    res = data.sense3;
+    nameDet = detectNameShort(floor(res/2));
+    nameSt = stateNameShort(mod(res,2));
+    res3 = "R3("+nameSt+","+nameDet+")";
+    
+    return res1+","+res2+","+res3;
+}
+
+function getNameMulti(circuit,data){
+    nameGC = gcName(circuit.GC);
+    
+    res = data.sense1;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res1 = "Res1"+nameSt+nameDet;
+    
+    res = data.sense2;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res2 = "Res2"+nameSt+nameDet;
+    
+    res = data.sense3;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res3 = "Res3"+nameSt+nameDet;
+    
+    return nameGC+"_"+res1+"_"+res2+"_"+res3;
+}
+
+#Simple
+function simplePlotSave(name,circuit1,circuit2,data1,data2){
+    plotSimple(circuit1,circuit2,data1,data2);
+    exportfigure(name);
+}   
+
+function simplePlotSaveCut(name,circuit1,circuit2,data1,data2){
+    plotSimpleCut(circuit1,circuit2,data1,data2);
+    exportfigure(name);
+} 
+
+function plotSimple(circuit1,circuit2,data1,data2){
+    file = getFileSimple(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileSimple(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    plot(lambda*1e9,gain1,gain2,"Wavelength(nm)","Gain");
+    legend(getNameSimple(circuit1,data1),getNameSimple(circuit2,data2));
+}
+
+function plotSimpleCut(circuit1,circuit2,data1,data2){
+    lateral = 500;    
+    file = getFileSimple(circuit1,data1);
+    loaddata(file);
+    
+    lambda = transmition.wavelength;
+    gain1 = gain;
+    
+    file = getFileSimple(circuit2,data2);
+    loaddata(file);
+    
+    gain2 = gain;
+    
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
+    legend(getNameSimple(circuit1,data1),getNameSimple(circuit2,data2));
+}
+
+function getFileSimple(circuit,data){
+    nameGC = gcName(circuit.GC);
+    
+    res = data.sense1;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    
+    return "./Simulation/"+nameGC+"/"+nameDet+"/"+nameSt+"/Circuit"+nameGC+"_"+nameDet+"_"+nameSt+".lsf";
+}
+
+function getNameSimple(circuit,data){
+    nameGC = gcName(circuit.GC);
+    
+    res = data.sense1;
+    nameDet = detectName(floor(res/2));
+    nameSt = stateName(mod(res,2));
+    res1 = "Res"+nameSt+nameDet;
+    
+    return nameGC+"_"+res1;
+}

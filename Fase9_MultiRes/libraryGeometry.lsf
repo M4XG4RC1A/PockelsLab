@@ -1,0 +1,92 @@
+print("Library Geometry ON");
+
+function setLength(wg){
+    setnamed(wg.name,"length",wg.length*1e-6);
+}
+
+function buildWG(wg){
+    setLength(wg);
+    setnamed(wg.name,"ldf filename",wg.type);
+}
+
+function buildCircuit(circuit,wgIn,wgOut){
+    for(i=1:circuit.resonators){
+        wgBase = wgIn;
+        wgBase.name = wgBase.name+"_"+num2str(i);
+        buildWG(wgBase);
+        
+        wgBase = wgOut;
+        wgBase.name = wgBase.name+"_"+num2str(i);
+        buildWG(wgBase);
+    }
+    
+    connectGC(circuit);
+    
+    for(i=1:circuit.resonators+1){
+        wgBase.name = circuit.name+"_"+num2str(i);
+        wgBase.type = circuit.type;
+        wgBase.length = circuit.length;
+        buildWG(wgBase);
+    }
+}
+
+function connectGC(circuit){
+    if(circuit.GC==1){
+        try{        
+            disconnect(circuit.ONA,"output",circuit.name+"_1","port 1");
+            disconnect(circuit.name+"_"+num2str(circuit.resonators+1),"port 2",circuit.ONA,"input 1");
+            connect(circuit.ONA,"output",circuit.GCin,"port 1");
+            connect(circuit.GCin,"port 2",circuit.name+"_1","port 1");
+            connect(circuit.name+"_"+num2str(circuit.resonators+1),"port 2",circuit.GCout,"port 2");
+            connect(circuit.GCout,"port 1",circuit.ONA,"input 1");
+        }
+    }else{
+        try{
+            disconnect(circuit.ONA,"output",circuit.GCin,"port 1");
+            disconnect(circuit.GCin,"port 2",circuit.name+"_1","port 1");
+            disconnect(circuit.name+"_"+num2str(circuit.resonators+1),"port 2",circuit.GCout,"port 2");
+            disconnect(circuit.GCout,"port 1",circuit.ONA,"input 1");
+            connect(circuit.ONA,"output",circuit.name+"_1","port 1");
+            connect(circuit.name+"_"+num2str(circuit.resonators+1),"port 2",circuit.ONA,"input 1");
+        }
+    }
+}
+
+function lengthRes(res,type){
+    if(type=="In"){
+        return res.radius*2*pi*res.wgIn;
+    }else if(type=="Out"){
+        return res.radius*2*pi*res.wgOut;
+    }else if(type=="Sense"){
+        return res.radius*2*pi*res.wgSense;
+    }else{
+        print("Invalid");
+    }
+}
+
+function changeRes(circuit,res){
+    for(i=1:circuit.resonators){
+        changeResSimple(res,i);
+    }
+}
+
+function changeResSimple(res,i){
+    wgBase = res;
+    wgBase.name = wgBase.name+"_"+num2str(i);
+    wgBase.type = selRes(wgBase);
+    buildWG(wgBase);
+}
+
+function selRes(res){
+    if(res.state==1&res.detection==1){
+        return res.ActiveDetect;
+    }else if(res.state==1&res.detection==0){
+        return res.ActiveEmpty;
+    }else if(res.state==0&res.detection==1){
+        return res.InactiveDetect;
+    }else if(res.state==0&res.detection==0){
+        return res.InactiveEmpty;
+    }else {
+        print("Invalid Res");
+    }
+}

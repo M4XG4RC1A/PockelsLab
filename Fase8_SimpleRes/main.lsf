@@ -1,0 +1,79 @@
+#Waveguides paths
+wgSi = "./wg/wgSi_BaseSiO2_CladingSiO2.ldf";
+wgSiCurve = "./wg/wgSi_BaseSiO2_CladingSiO2_Curve.ldf";
+wgDetect = "./wg/wgSi_BaseSiO2_CladingActive_Curve.ldf";
+wgEmpty = "./wg/wgSi_BaseSiO2_CladingInactive_Curve.ldf";
+wgActiveDetect = "./wg/wgSi_BaseActive_CladingActive_Curve.ldf";
+wgInactiveDetect = "./wg/wgSi_BaseInactive_CladingActive_Curve.ldf";
+wgActiveEmpty = "./wg/wgSi_BaseActive_CladingInactive_Curve.ldf";
+wgInactiveEmpty = "./wg/wgSi_BaseInactive_CladingInactive_Curve.ldf";
+gcSParam = "./wg/gc_SParam.txt";
+
+#Import Libraries
+libraryGeometry;
+libraryExports;
+
+#Objects
+sResonator = {"radius": 30,
+    "wgIn": 1/4,
+    "wgOut": 1/4,
+    "wgSense": 1/2};
+wgResIn = {"name": "wgResIn",
+    "type": wgSiCurve,
+    "length": lengthRes(sResonator,"In")};
+wgResOut = {"name": "wgResOut",
+    "type": wgSiCurve,
+    "length": lengthRes(sResonator,"Out")};
+circuit = {"name": "wgMain",
+    "resonators":1,
+    "type": wgSi,
+    "length": 100,
+    "ONA": "ONA",
+    "GCin": "GC_In",
+    "GCout": "GC_Out",
+    "GC": 0};
+wgSense = {"name": "wgSense",
+    "state": 0,
+    "detection": 0,
+    "type": "",
+    "ActiveDetect": wgActiveDetect,
+    "ActiveEmpty": wgActiveEmpty,
+    "InactiveDetect": wgInactiveDetect,
+    "InactiveEmpty": wgInactiveEmpty,
+    "length": lengthRes(sResonator,"Sense")};
+saveDat = {"name":"",
+        "lumerical": true,
+        "matlab": true,
+        "plot": true};
+
+#Construct
+switchtodesign;
+buildCircuit(circuit,wgResIn,wgResOut);
+
+for(gc = [0,1]){
+    switchtodesign;
+    circuit.GC = gc;
+    connectGC(circuit);
+    for(resonator1 = 0:3){
+        switchtodesign;
+        wgSense.state = mod(resonator1,2);
+        wgSense.detection = floor(resonator1/2);
+        
+        nameGC = gcName(gc);
+        nameDet = detectName(wgSense.detection);
+        nameSt = stateName(wgSense.state);
+        
+        print("Actual: "+nameGC+", "+nameDet+", "+nameSt);     
+        
+        changeResSimple(wgSense,1);
+        
+        run;
+        
+        saveDat.name = "./Simulation/"+nameGC+"/"+nameDet+"/"+nameSt+"/Circuit"+nameGC+"_"+nameDet+"_"+nameSt;
+        print("Filename: "+saveDat.name);
+        saveDataONA(circuit,saveDat);
+        closeall;
+    }
+}
+
+print("Finish");

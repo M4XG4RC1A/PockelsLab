@@ -1,0 +1,73 @@
+print("Library Export ON");
+
+function stateName(st){
+    if(st==0){
+        return "Inactive";
+    }else{
+        return "Active";
+    }
+}
+
+function stateNameShort(st){
+    if(st==0){
+        return "I";
+    }else{
+        return "A";
+    }
+}
+
+function detectName(det){
+    if(det==0){
+        return "Empty";
+    }else{
+        return "Detect";
+    }
+}
+
+function detectNameShort(det){
+    if(det==0){
+        return "E";
+    }else{
+        return "D";
+    }
+}
+
+function gcName(gc){
+    if(gc==0){
+        return "GC_OFF";
+    }else{
+        return "GC_ON";
+    }
+}
+
+function saveDataONA(circuit,saveDat){
+    transmition = getresult(circuit.ONA,"input 1/mode 1/transmission");
+    groupvelocity = getresultdata(circuit.ONA,"input 1/mode 1/group velocity");
+    dispersion = getresultdata(circuit.ONA,"input 1/mode 1/dispersion");
+    loss = getresultdata(circuit.ONA,"input 1/mode 1/loss");
+    gain = getresultdata(circuit.ONA,"input 1/mode 1/gain");
+ 
+    pTransmition = getresultdata(circuit.ONA,"input 1/mode 1/peak/transmission");
+    pFrequency = getresultdata(circuit.ONA,"input 1/mode 1/peak/frequency");
+    pGroupVelocity = getresultdata(circuit.ONA,"input 1/mode 1/peak/group velocity");
+    pDispersion = getresultdata(circuit.ONA,"input 1/mode 1/peak/dispersion");
+    pLoss = getresultdata(circuit.ONA,"input 1/mode 1/peak/loss");
+    pBandwidth = getresultdata(circuit.ONA,"input 1/mode 1/peak/gain");
+    pFSR = getresultdata(circuit.ONA,"input 1/mode 1/peak/free spectral range");
+    pQfactor = getresultdata(circuit.ONA,"input 1/mode 1/peak/quality factor");
+    pFinesse = getresultdata(circuit.ONA,"input 1/mode 1/peak/finesse");
+    pExtinctionRatio = getresultdata(circuit.ONA,"input 1/mode 1/peak/extinction ratio");
+    
+    if(saveDat.lumerical){
+        savedata(saveDat.name,transmition,groupvelocity,dispersion,loss,gain,pTransmition,pFrequency,pGroupVelocity,pDispersion,pLoss,pBandwidth,pFSR,pQfactor,pFinesse,pExtinctionRatio);
+    }
+    if(saveDat.matlab){
+        matlabsave(saveDat.name,transmition,groupvelocity,dispersion,loss,gain,pTransmition,pFrequency,pGroupVelocity,pDispersion,pLoss,pBandwidth,pFSR,pQfactor,pFinesse,pExtinctionRatio);
+    }
+    if(saveDat.plot){
+        plot(transmition.wavelength*1e9,gain,"Wavelength (nm)","Gain");
+        legend("Gain");
+        exportfigure(saveDat.name+"_gainvslambda");
+    }
+}        
+        
