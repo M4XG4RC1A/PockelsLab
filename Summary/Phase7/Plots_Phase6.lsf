@@ -1,0 +1,40 @@
+#Detect vs Empty neff, ng, compact model
+loaddata("./DetectActive/WaveguideSiFreq.ldf");
+neff1 = neff;
+ng1 = ng;
+cm1 = compactModel;
+
+loaddata("./DetectInactive/WaveguideSiFreq.ldf");
+neff2 = neff;
+ng2 = ng;
+cm2 = compactModel;
+
+loaddata("./EmptyActive/WaveguideSiFreq.ldf");
+neff3 = neff;
+ng3 = ng;
+cm3 = compactModel;
+
+loaddata("./EmptyInactive/WaveguideSiFreq.ldf");
+neff4 = neff;
+ng4 = ng;
+cm4 = compactModel;
+
+plot(lambda*1e3,neff1,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+holdon;   
+plot (lambda*1e3,cm1.fit, "Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+plot(lambda*1e3,neff2,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+plot (lambda*1e3,cm2.fit,"Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+plot(lambda*1e3,neff3,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+plot (lambda*1e3,cm3.fit,"Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+plot(lambda*1e3,neff4,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+plot (lambda*1e3,cm4.fit,"Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+
+legend("neff(A,D)",cm1.ec,"neff(I,D)",cm2.ec,"neff(A,E)",cm3.ec,"neff(I,E)",cm4.ec);
+holdoff;
+
+plot(lambda*1e3,ng1,ng2,ng3,ng4,"Wavelength(nm)","Group Index","","plot type=line, pen=-, linewidth=2");
+legend("ng(A,D)","ng(I,D)","ng(A,E)","ng(I,E)");
+
+image(E.x*1e9,E.y*1e9,E.E2,"x(nm)","y(nm)");
+
+

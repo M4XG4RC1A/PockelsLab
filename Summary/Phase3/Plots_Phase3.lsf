@@ -1,0 +1,26 @@
+#Detect vs Empty neff, ng, compact model
+loaddata("./Detect/WaveguideSiFreq.ldf");
+neff1 = neff;
+ng1 = ng;
+cm1 = compactModel;
+
+loaddata("./Empty/WaveguideSiFreq.ldf");
+neff2 = neff;
+ng2 = ng;
+cm2 = compactModel;
+
+plot(lambda*1e3,neff1,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+holdon;   
+plot (lambda*1e3,cm1.fit, "Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+plot(lambda*1e3,neff2,"Wavelength(nm)","Effective Index","","plot type=line, pen=-, linewidth=2");
+plot (lambda*1e3,cm2.fit,"Wavelength(nm)", "Effective Index","", "plot type=line, pen=-., linewidth=2");
+
+legend("neff(D)",cm1.ec,"neff(E)",cm2.ec);
+holdoff;
+
+plot(lambda*1e3,ng1,ng2,"Wavelength(nm)","Group Index","","plot type=line, pen=-, linewidth=2");
+legend("ng(D)","ng(E)");
+
+image(E.x*1e9,E.y*1e9,E.E2,"x(nm)","y(nm)");
+
+

@@ -9,35 +9,40 @@ d1 = {"sense1": 0, "sense2": 0, "sense3": 0};
 d2 = {"sense1": 0, "sense2": 0, "sense3": 0};   
 
 #GC on and off
-#name = "./Plots/GCON_OFF_Empty";
-#c1 = {"GC": 0};
-#c2 = {"GC": 1};
-#d1 = {"sense1": 0, "sense2": 0, "sense3": 0};
+name = "./Plots/GCON_OFF_Empty";
+name = "./Plots/AllEmptyFull";
+c1 = {"GC": 0};
+c2 = {"GC": 1};
+d1 = {"sense1": 0, "sense2": 0, "sense3": 0};
 #multiPlotSave(name,c1,c2,d1,d1);
 
-#name = "./Plots/GCON_OFF_Detection";
-#c1 = {"GC": 0};
-#c2 = {"GC": 1};
-#d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
+name = "./Plots/GCON_OFF_Detection";
+name = "./Plots/AllDetectFull";
+c1 = {"GC": 0};
+c2 = {"GC": 1};
+d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
 #multiPlotSave(name,c1,c2,d1,d1);
 
 
 #GC on and off
-#name = "./Plots/GCON_OFF_Empty_Cut";
-#c1 = {"GC": 0};
-#c2 = {"GC": 1};
-#d1 = {"sense1": 0, "sense2": 0, "sense3": 0};
+name = "./Plots/GCON_OFF_Empty_Cut";
+name = "./Plots/AllEmptyZoom";
+c1 = {"GC": 0};
+c2 = {"GC": 1};
+d1 = {"sense1": 0, "sense2": 0, "sense3": 0};
 #multiPlotSaveCut2(name,c1,c2,d1,d1);
 
-#name = "./Plots/GCON_OFF_Detection_Cut";
-#c1 = {"GC": 0};
-#c2 = {"GC": 1};
-#d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
+name = "./Plots/GCON_OFF_Detection_Cut";
+name = "./Plots/AllDetectZoom";
+c1 = {"GC": 0};
+c2 = {"GC": 1};
+d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
 #multiPlotSaveCut2(name,c1,c2,d1,d1);
 
 
 #Active 1
 name = "./Plots/GCOFF_1Detect";
+name = "./Plots/1Detect";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 0, "sense3": 0};
 d2 = {"sense1": 0, "sense2": 2, "sense3": 0};
@@ -47,6 +52,7 @@ d3 = {"sense1": 0, "sense2": 0, "sense3": 2};
 
 #Active 2
 name = "./Plots/GCOFF_2Detect";
+name = "./Plots/2Detect";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 2, "sense3": 0};
 d2 = {"sense1": 0, "sense2": 2, "sense3": 2};
@@ -56,12 +62,14 @@ d3 = {"sense1": 2, "sense2": 0, "sense3": 2};
 
 #Active 3
 name = "./Plots/GCOFF_3Detect";
+name = "./Plots/3Detect";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
 #multiPlotSaveCut1(name,c1,d1);
 
 #Active 1 on BTO
 name = "./Plots/GCOFF_1Detect_Active";
+name = "./Plots/1DetectActive";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 0, "sense3": 0};
 d2 = {"sense1": 3, "sense2": 0, "sense3": 0};
@@ -71,6 +79,7 @@ d4 = {"sense1": 2, "sense2": 0, "sense3": 1};
 
 #Active 2 on BTO
 name = "./Plots/GCOFF_2Detect_Active";
+name = "./Plots/2DetectActive";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 2, "sense3": 0};
 d2 = {"sense1": 3, "sense2": 2, "sense3": 0};
@@ -80,9 +89,10 @@ d4 = {"sense1": 2, "sense2": 2, "sense3": 1};
 
 #Active 3 on BTO
 name = "./Plots/GCOFF_3Detect_Active";
+name = "./Plots/3DetectActive";
 c1 = {"GC": 0};
 d1 = {"sense1": 2, "sense2": 2, "sense3": 2};
 d2 = {"sense1": 3, "sense2": 2, "sense3": 2};
 d3 = {"sense1": 2, "sense2": 3, "sense3": 2};
 d4 = {"sense1": 2, "sense2": 2, "sense3": 3};
-#multiPlotSaveCut4(name,c1,c1,c1,c1,d1,d2,d3,d4);
+multiPlotSaveCut4(name,c1,c1,c1,c1,d1,d2,d3,d4);

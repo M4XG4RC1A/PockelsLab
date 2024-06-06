@@ -99,8 +99,8 @@ function plotMultiCut4(circuit1,circuit2,circuit3,circuit4,data1,data2,data3,dat
     
     gain4 = gain;
     
-    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),gain3(5000-lateral:5000+lateral),gain4(5000-lateral:5000+lateral),"Wavelength(nm)","Gain");
-    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2),getNameMultiShort(circuit3,data3),getNameMultiShort(circuit4,data4));
+    plot(lambda(5000-lateral:5000+lateral)*1e9,gain1(5000-lateral:5000+lateral),gain2(5000-lateral:5000+lateral),gain3(5000-lateral:5000+lateral)-0.05,gain4(5000-lateral:5000+lateral)-0.1,"Wavelength(nm)","Gain");
+    legend(getNameMultiShort(circuit1,data1),getNameMultiShort(circuit2,data2),getNameMultiShort(circuit3,data3)+"-0.05",getNameMultiShort(circuit4,data4)+"-0.1");
 }
 
 function plotMulti(circuit1,circuit2,data1,data2){

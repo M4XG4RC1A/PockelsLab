@@ -98,35 +98,4 @@ saveSweepInterconnect(singleSweep.start,"wgSi/Sweep","WaveguideSiFreq",SaveTypes
 closeall;
 closeBendStudy();
 
-print("Si3N4 base waveguide");
-
-switchtolayout;
-centerWG(wgSiN,cladding,base,wafer);
-centerMesh(meshFDE,wgSiN);
-prepareFDE(FDESiN);
-openBendStudy(wgSiN);
-
-nmodes = runModes();
-
-mTE = mainTE(nmodes);
-print("Modes>0, Modes:"+num2str(nmodes));
-
-saveMode(nmodes,mTE.i,"wgSi3N4/Modes","WaveguideSiNMode",SaveTypes);
-
-FDESweep = FDESiN;
-FDESweep.wavelength = singleSweep.start;
-prepareFDE(FDESweep);
-openBendStudy(wgSiN);
-nmodes = runModes();
-mTE = mainTE(nmodes);
-saveMode(nmodes,mTE.i,"wgSi3N4/Sweep","WaveguideSiMMode",SaveTypes);
-
-singleSweep.mode = mTE.i;
-prepareSingleSweepDetailed(singleSweep);
-
-runSweep();
-saveSweepInterconnect(singleSweep.start,"wgSi3N4/Sweep","WaveguideSiNFreq",SaveTypes);
-closeall;
-closeBendStudy();
-
 print("Finish");

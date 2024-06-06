@@ -2,17 +2,17 @@ Ansys Lumerical 2024 R1 Charge Transport Solver Version 7.13.3633 (Windows 64bit
  expires (month/day/year): 12/31/2035
 using config file: Ansys Licensing set with ANSYSLMD_LICENSE_FILE
 license host: 1055@localhost
-current time: Thu May 16 19:10:57 2024
+current time: Fri May 24 21:52:55 2024
 Running on host: MSI
-Running ldev file: C:\Program Files\Lumerical\v241\bin\device-engine-msmpi.exe C:/Users/maxga/Downloads/SiBTO/Si_BTO.ldev -remote -shared-solve-license QU5TWVNfTElDRU5TSU5HX0NPTlRFWFRfREFUQT08QU5TWVNfTElDRU5TSU5HX0NPTlRFWFRfREFUQT48SUQ+OWMzYTQxNjQtNzRjZS00YWQ3LWIzODEtMDNiN2FkNWI2MzRjPC9JRD48VFlQRT5IUENfUEFSQU1FVFJJQzwvVFlQRT48TkFNRT5IUEMgUGFyYW1ldHJpYzwvTkFNRT48SEFORExFUj42MDMxM0BNU0k8L0hBTkRMRVI+PC9BTlNZU19MSUNFTlNJTkdfQ09OVEVYVF9EQVRBPgo=
-  ...C:/Users/maxga/Downloads/SiBTO/Si_BTO.ldev loaded
+Running ldev file: C:\Program Files\Lumerical\v241\bin\device-engine-msmpi.exe C:/Users/maxga/Downloads/PockelsLab/Fase5_BaTiO3/SiBTO/Si_BTO.ldev -remote -shared-solve-license QU5TWVNfTElDRU5TSU5HX0NPTlRFWFRfREFUQT08QU5TWVNfTElDRU5TSU5HX0NPTlRFWFRfREFUQT48SUQ+OWZjZDQ3MTYtYzgyMC00OGI4LWIwMzAtMGFkMjA1ZTIxMzEzPC9JRD48VFlQRT5IUENfUEFSQU1FVFJJQzwvVFlQRT48TkFNRT5IUEMgUGFyYW1ldHJpYzwvTkFNRT48SEFORExFUj4xNjAzM0BNU0k8L0hBTkRMRVI+PC9BTlNZU19MSUNFTlNJTkdfQ09OVEVYVF9EQVRBPgo=
+  ...C:/Users/maxga/Downloads/PockelsLab/Fase5_BaTiO3/SiBTO/Si_BTO.ldev loaded
 Remote execution (remote argument) set to true.
 Generating mesh.
-Mesh generation complete (1s)
-  + vertices: 2169
-  + elements: 4274
+Mesh generation complete (0s)
+  + vertices: 2178
+  + elements: 4292
 All processes are communicating and ready to proceed to simulation...
 Starting solver.
-Simulation completed successfully at: Thu May 16 19:11:00 2024
-  + time to run simulation: 2s
+Simulation completed successfully at: Fri May 24 21:53:00 2024
+  + time to run simulation: 4s
   + time to finalize and save data: 0s

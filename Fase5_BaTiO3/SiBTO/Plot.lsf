@@ -1,0 +1,9 @@
+
+plot(V,E,"Potential(V)","Electric Field(V/m)","","plot type=line, pen=-, linewidth=2");
+legend("E Field");
+
+ni = 2.4272;
+r = 1300e-12;
+n = ni - 1/2*ni^3*r*E; 
+plot(V,n,"Potential(V)","BTO Index","","plot type=line, pen=-, linewidth=2");
+legend("BTO");

@@ -1,0 +1,19 @@
+DeteccionActivo
+neff = 2.57143
+ng = 3.88473
+ec = 2.61408-0.859111(\lambda-1.5)+0.122457(\lambda-1.5)^2
+
+DeteccionInactivo
+neff = 2.57256
+ng = 3.88192
+ec = 2.61509-0.856777(\lambda-1.5)+0.12449(\lambda-1.5)^2
+
+AusenciaActivo
+neff = 2.57036
+ng = 3.88644
+ec = 2.6131-0.860881(\lambda-1.5)+0.122203(\lambda-1.5)^2
+
+AusenciaInactivo
+neff = 2.57149
+ng = 3.88362
+ec = 2.61411-0.858536(\lambda-1.5)+0.124256(\lambda-1.5)^2

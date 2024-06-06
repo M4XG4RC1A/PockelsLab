@@ -93,12 +93,14 @@ function plotSimple(circuit1,circuit2,data1,data2){
 function plotSimpleCut(circuit1,circuit2,data1,data2){
     lateral = 500;    
     file = getFileSimple(circuit1,data1);
+    print(file);
     loaddata(file);
     
     lambda = transmition.wavelength;
     gain1 = gain;
     
     file = getFileSimple(circuit2,data2);
+    print(file);
     loaddata(file);
     
     gain2 = gain;

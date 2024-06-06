@@ -138,69 +138,7 @@ for(x=SiWidths){
 }
 
 
-print("Si3N4 base waveguide");
 
-switchtolayout;
-centerWG(wgSiN,cladding,base,wafer);
-centerMesh(meshFDE,wgSiN);
-prepareFDE(FDESiN);
-nmodes = runModes();
-
-mTE = mainTE(nmodes);
-print("Modes>0, Modes:"+num2str(nmodes));
-
-saveMode(nmodes,mTE.i,"wgSi3N4/Main/Modes","WaveguideSiNMode",SaveTypes);
-
-FDESweep = FDESiN;
-FDESweep.wavelength = singleSweep.start;
-prepareFDE(FDESweep);
-nmodes = runModes();
-mTE = mainTE(nmodes);
-saveMode(nmodes,mTE.i,"wgSi3N4/Main/Sweep","WaveguideSiMMode",SaveTypes);
-
-singleSweep.mode = mTE.i;
-prepareSingleSweepDetailed(singleSweep);
-
-runSweep();
-saveSweepInterconnect(singleSweep.start,"wgSi3N4/Main/Sweep","WaveguideSiNFreq",SaveTypes);
-closeall;
-
-for(x=SiNWidths){
-    for(y=SiNHeights){
-        print("Running x:"+num2str(x)+", y:"+num2str(y));
-        
-        #Change dimensions
-        wgSiN.width = x;
-        wgSiN.height = y;
-        
-        #Set layout
-        switchtolayout;
-        centerWG(wgSiN,cladding,base,wafer);
-        centerMesh(meshFDE,wgSiN);
-        prepareFDE(FDESiN);
-        
-        nmodes = runModes();
-        print("Modes>0, Modes:"+num2str(nmodes));
-        
-        mTE = mainTE(nmodes);
-        saveMode(nmodes,mTE.i,"wgSi3N4/Corners/Modes","WaveguideSiNMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
-
-        FDESweep = FDESiN;
-        FDESweep.wavelength = singleSweep.start;
-        prepareFDE(FDESweep);
-        runModes();
-        
-        mTE = mainTE(nmodes);
-        saveMode(nmodes,mTE.i,"wgSi3N4/Corners/Sweep","WaveguideSiNMode"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
-        
-        singleSweep.mode = mTE.i;
-        prepareSingleSweepDetailed(singleSweep);
-        
-        runSweep();
-        saveSweepInterconnect(singleSweep.start,"wgSi3N4/Corners/Sweep","WaveguideSiNFreq"+num2str(x*10)+"_"+num2str(y*10),SaveTypes);
-        closeall;
-    }
-}
 
 
 print("Finish");

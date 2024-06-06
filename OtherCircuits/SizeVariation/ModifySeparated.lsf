@@ -1,0 +1,14 @@
+#Waveguides paths
+neDetect = 2.57271;
+ngDetect = 3.8814;
+neEmpty = 2.57164;
+ngEmpty = 3.8831;
+
+setnamed("RING_2","effective index 1",neEmpty);
+setnamed("RING_2","group index 1",ngEmpty);
+
+setnamed("RING_1","effective index 1",neEmpty);
+setnamed("RING_1","group index 1",ngEmpty);
+
+setnamed("RING_3","effective index 1",neDetect);
+setnamed("RING_3","group index 1",ngDetect);

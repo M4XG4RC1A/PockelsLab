@@ -203,16 +203,16 @@ function saveSweepInterconnect(wavelength,folder,name,data){
     if(data.matlab){ matlabsave("./"+folder+"/"+name,wavelength,lambda,loss,neff,vgLambda,vg,ng,dLambda,dispersion,compactModel); }
     #Save data images    
     if(data.model){
-        plot(vgLambda,ng,"Wavelength (microns)","Group Index");
+        plot(vgLambda*1e3,ng,"Wavelength(nm)","Group Index");
         legend("ng");
         exportfigure("./"+folder+"/"+name+"_ngvslambda");
-        plot(lambda,neff,"Wavelength (microns)","Effective Index");
+        plot(lambda,neff,"Wavelength(nm)","Effective Index");
         legend("neff");
         exportfigure("./"+folder+"/"+name+"_neffvslambda");
         try{
-            plot (lambda, neff, "lambda", "neff", compactModel.ec, "plot type=line, color=red, pen=-, linewidth=2");  # plot the result
+            plot (lambda, neff, "Wavelength(nm)", "neff", compactModel.ec, "plot type=line, color=red, pen=-, linewidth=2");  # plot the result
             holdon;    
-            plot (lambda,  compactModel.fit, "lambda", "neff", compactModel.ec, "plot type=line, color=blue, pen=-., linewidth=2");  # plot the result    
+            plot (lambda,  compactModel.fit, "Wavelength(nm)", "neff", compactModel.ec, "plot type=line, color=blue, pen=-., linewidth=2");  # plot the result    
             legend("neff","Fit");
             exportfigure("./"+folder+"/"+name+"_compactModel");
             holdoff;
