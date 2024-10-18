@@ -18,6 +18,10 @@ import numpy as np
 # import h5py
 import scipy.io
 
+import matplotlib.animation as animation
+from functools import partial
+import time
+
 #Tkinter Start
 root= Tk()
 root.title("PockelsLab")
@@ -74,6 +78,9 @@ GPIO.setup(bBTO[2], GPIO.IN)
 
 def close(event):
 	root.quit(); root.destroy()
+
+global anim
+anim = [0]*4
 
 #Colors
 bluetec = "#0039A6"
@@ -164,12 +171,32 @@ def setRings(lArray):
 	GPIO.output(lBTO[2],lArray["R3"])
 """
 
+def animate(frames,line,xdata,ydata,index):
+	if index == 0:
+		if frames < 1000:
+			line.set_xdata(xdata[-frames:])
+			line.set_ydata(ydata[-frames:])
+	elif index == 1:
+		if frames < 2000 and frames > 999:
+			line.set_xdata(xdata[-frames+1000:])
+			line.set_ydata(ydata[-frames+1000:])
+	elif index == 2:
+		if frames < 3000 and frames > 1999:
+			line.set_xdata(xdata[-frames+2000:])
+			line.set_ydata(ydata[-frames+2000:])
+	elif index == 3:
+		if frames < 4000 and frames > 2999:
+			line.set_xdata(xdata[-frames+3000:])
+			line.set_ydata(ydata[-frames+3000:])
+	return line
+
 def namedState(sBTO,sRing):
 	strBTO = "Active" if sBTO == 1 else "Inactive"
 	strRing = "Detect" if sRing == 1 else "Empty"
 	return strBTO+strRing
 
-def plotGraph(dRing,dBTO,labelStr,lStyle,lColor,lWidth):
+def plotGraph(dRing,dBTO,labelStr,lStyle,lColor,lWidth,index):
+	global anim
 	#Example Res1InactiveEmpty Active/Inactive Detect/Empty
 	res1 = 'Res1'+namedState(dBTO["R1"],dRing["R1"])
 	res2 = 'Res2'+namedState(dBTO["R2"],dRing["R2"])
@@ -178,7 +205,11 @@ def plotGraph(dRing,dBTO,labelStr,lStyle,lColor,lWidth):
 	data = scipy.io.loadmat(path)
 	gain = np.array(data.get('gain'))[4500:5500]
 	wavelength = np.array(data.get('wavelength'))[4500:5500]
-	ax.plot(wavelength,gain, label=labelStr, linestyle=lStyle, color=lColor, linewidth=lWidth)
+	result, = ax.plot(wavelength[0],gain[0], label=labelStr, linestyle=lStyle, color=lColor, linewidth=lWidth)
+	if index == 0:
+		anim[index] = animation.FuncAnimation(fig, partial(animate,line=result,xdata=wavelength,ydata=gain,index=index), np.arange(0,1000,10), interval=2, repeat=False)
+	else:
+		anim[index] = animation.FuncAnimation(fig, partial(animate,line=result,xdata=wavelength,ydata=gain,index=index), np.arange(0,4000,10), interval=2, repeat=False)
 
 def confGraph():
 	ax.set_title('Circuit Output')
@@ -187,9 +218,11 @@ def confGraph():
 	ax.xaxis.label.set_color(labelColor); ax.yaxis.label.set_color(labelColor)
 	ax.tick_params(colors=gridColor)
 	ax.set_facecolor(faceCol)
+	ax.set(xlim=[1.5434e-6, 1.5533e-6], ylim=[-1.5, -0.1])
 	#ax.grid(True)
 
 def setBars(dRings):
+	print(dRings)
 	rings = list(dRings.keys())
 	values = list(dRings.values())
 	ax2.bar(rings, values, color=rColors, width=0.4)
@@ -197,6 +230,8 @@ def setBars(dRings):
 	ax2.xaxis.label.set_color(labelColor); ax2.yaxis.label.set_color(labelColor)
 	ax2.tick_params(colors=gridColor)
 	ax2.set_facecolor(faceCol)
+	ax2.set(ylim=[0,1])
+	canvas2.draw_idle()
 
 def setIndicators(dRings):
 	if dRings["R1"]:
@@ -220,26 +255,28 @@ def funRead():
 	ax2.clear()
 	dRings = {'R1':1,'R2':0,'R3':0} #getRings Fun
 	dBTO = {'R1':0,'R2':0,'R3':0} #getBTOs Fun
-	plotGraph(dRings,dBTO,"Actual State","solid","blue",2)
+	plotGraph(dRings,dBTO,"Actual State","solid","blue",2,0)
 	confGraph()
 	setBars(dRings)
+	setIndicators(dRings)
 	ax.legend(loc='best', labelcolor=legendColor) #loc='upper right'
 	canvas.draw_idle()
 
 def funAnalysis():
+	global anim
 	print("Reading")
 	ax.clear()
 	ax2.clear()
 	confGraph()
-	dRings = {'R1':1,'R2':0,'R3':0} #getRings Fun
+	dRings = {'R1':1,'R2':0,'R3':1} #getRings Fun
 	dBTO = {'R1':0,'R2':0,'R3':0}
-	plotGraph(dRings,dBTO,"No BTO","solid",rMixedColor,4)
+	plotGraph(dRings,dBTO,"No BTO","solid",rMixedColor,4,0)
 	dBTO = {'R1':1,'R2':0,'R3':0}
-	plotGraph(dRings,dBTO,"BTO 1","solid",rColors[0],6)
+	plotGraph(dRings,dBTO,"BTO 1","solid",rColors[0],6,1)
 	dBTO = {'R1':0,'R2':1,'R3':0}
-	plotGraph(dRings,dBTO,"BTO 2","solid",rColors[1],4)
+	plotGraph(dRings,dBTO,"BTO 2","solid",rColors[1],4,2)
 	dBTO = {'R1':0,'R2':0,'R3':1}
-	plotGraph(dRings,dBTO,"BTO 3","solid",rColors[2],2)
+	plotGraph(dRings,dBTO,"BTO 3","solid",rColors[2],2,3)
 	setBars(dRings)
 	setIndicators(dRings)
 	ax.legend(loc='best', labelcolor=legendColor) #loc='upper right'
@@ -249,12 +286,8 @@ def funAnalysis():
 #First Plots
 
 confGraph()
-
-dRings = {'R1':1,'R2':0,'R3':0}
-dBTO = {'R1':0,'R2':0,'R3':0}
+dRings = {'R1':0,'R2':0,'R3':0}
 setBars(dRings)
-#plotGraph(dBTO,dRings)
-
 
 #Action Buttons
 
