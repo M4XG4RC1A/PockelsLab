@@ -104,7 +104,7 @@ GC_State = "GC_OFF" #"GC_ON"/"GC_OFF"
 #Frames
 Analysis = Frame(root, bg=bgBack, width=screen_width*4/5, height=screen_height)
 Analysis.pack(side= LEFT) #Start of the Principal Frame with the first Flange Color
-Action = Frame(root, bg=bgBack, width=screen_width/5, height=screen_height, highlightbackground="white", highlightthickness=2)
+Action = Frame(root, bg=bgBack, width=screen_width/5, height=screen_height, highlightbackground="white", highlightthickness=1)
 Action.pack(side= RIGHT)#Start the part of the sentences
 
 #First Graph
@@ -298,12 +298,12 @@ btnRead = Button(Action,
 				foreground= btnColor2,
 				activebackground= btnColor3,
 				activeforeground= btnColor4,
-				highlightthickness= 2,
+				highlightthickness= 1,
 				highlightbackground= btnColor2,
 				highlightcolor= "WHITE",
-				border= 5,
+				border= 2,
 				cursor= "hand1",
-				font= ("Arial", 16, "bold"),
+				font= ("Arial", 10, "bold"),
 				width=int(screen_width/10), height=int(screen_height/10),
 				command=lambda:funRead(), 
 				compound="c",)
@@ -316,12 +316,12 @@ btnAnalysis = Button(Action,
 				foreground= btnColor4,
 				activebackground= btnColor3,
 				activeforeground= btnColor4,
-				highlightthickness= 2,
+				highlightthickness= 1,
 				highlightbackground= btnColor2,
 				highlightcolor= "WHITE",
-				border= 5,
+				border= 2,
 				cursor= "hand1",
-				font= ("Arial", 16, "bold"),
+				font= ("Arial", 10, "bold"),
 				width=int(screen_width/10), height=int(screen_height/10),
 				command=lambda:funAnalysis(), 
 				compound="c",)
